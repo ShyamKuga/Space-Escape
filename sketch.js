@@ -16,6 +16,7 @@ var explosion
 var explosionImg
 var gameover
 var bottomEdge,topEdge
+var alienArr = []
 
 function preload(){
   astroImg = loadImage("Images/astro (2).png")
@@ -72,12 +73,12 @@ function draw() {
     if (background1.x <200 ){
       background1.x = background1.width/2
      }
-     console.log(astro)
+
    
   background1.velocityX = -15
   score = frameCount
     drawSprites();
-    console.log(gameState)
+    
     astro.setCollider("circle",0,0,40);
   
     if (keyCode === UP_ARROW){
@@ -105,7 +106,7 @@ function draw() {
       alien.scale = 0.06
       alien.velocityX = -10;
       alien.lifetime = 300; 
-      alien.setCollider
+      alienArr.push(alien)
       alienGroup.add(alien)
        
     }
@@ -114,8 +115,15 @@ function draw() {
    
        createBullet()
     }
+    for(var i = 0; i < alienArr.length; i++){
+      if (alienArr[i].isTouching(bulletGroup)){
+        alienArr[i].destroy()
+     
+      }
+    }
+    
     if(bulletGroup.isTouching(alienGroup)){
-      alienGroup.destroyEach()
+
       bulletGroup.destroyEach()
     }
     astro.collide(topEdge)
