@@ -72,7 +72,7 @@ function draw() {
     if (background1.x <200 ){
       background1.x = background1.width/2
      }
-     
+     console.log(astro)
    
   background1.velocityX = -15
   score = frameCount
