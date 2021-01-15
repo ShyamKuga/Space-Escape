@@ -1,13 +1,13 @@
 var astro, astroImg
-var Play
-var END 
-var gameState
+var Play = 0
+var END = 1
+var gameState = Play
 var background1
 var backgroundImg
 var astoridImg 
 var astroidGroup
 var gameoverImg
-var score 
+var score = 0
 var alienImg
 var bulletImg
 var bullet
@@ -17,6 +17,7 @@ var explosionImg
 var gameover
 var bottomEdge,topEdge
 var alienArr = []
+var count
 
 function preload(){
   astroImg = loadImage("Images/astro (2).png")
@@ -29,26 +30,22 @@ function preload(){
 }
 function setup() {
   createCanvas(800,400);
+  gameover = createSprite(400,200,50,50)
+  gameover.addImage(gameoverImg)
+  gameover.visible = false
   background1 = createSprite(0,200,400,400) 
   background1.addImage(backgroundImg)
   background1.scale = 2.5
   alienGroup = createGroup()
   astroidGroup = createGroup()
   bulletGroup = createGroup()
-  Play = 1
-  END = 0
-  gameState = Play
-  createEdgeSprites()
   astro = createSprite(100, 200, 50, 50);
   astro.addImage(astroImg)
   astro.scale = 0.09999
-  score = 1
-  score = frameCount
+  count = 0 
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
-  text(score, 100,100)
-
   bottomEdge = createSprite(0,400,800,5);
   topEdge = createSprite(0,0,800,5);
   bottomEdge.shapeColor = "black"
@@ -57,27 +54,32 @@ function setup() {
 }
 
 function draw() {
+  drawSprites();
 
-
+  /*score = frameCount
+  text(score, 100,100)*/
 
 
   astro.velocityY = 0
   astro.velocityX = 0
-
+ 
   if (gameState === Play){
-
+    astro.visible = true
+    gameover.visible = false
     astro.addImage(astroImg)
-    background("white");  
 
     background1.addImage(backgroundImg)
     if (background1.x <200 ){
       background1.x = background1.width/2
      }
 
-   
+  textSize(20)
+  textStyle(BOLD)
+  textFont("Georgia")
   background1.velocityX = -15
-  score = frameCount
-    drawSprites();
+  score = Math.round(World.frameRate/15) + score
+  text("Score:"+ score,10,30)
+  text("Ailens: "+ count,10,50)
     
     astro.setCollider("circle",0,0,40);
   
@@ -111,14 +113,14 @@ function draw() {
        
     }
 
-    if(keyCode == 32){
    
        createBullet()
-    }
+ 
     for(var i = 0; i < alienArr.length; i++){
       if (alienArr[i].isTouching(bulletGroup)){
         alienArr[i].destroy()
-     
+       
+        count += 1
       }
     }
     
@@ -134,21 +136,28 @@ function draw() {
   
 
   
-  if(gameState === END){
-  
+  if(gameState == END){
+  console.log(gameover.visible)
    background1.velocityX = 0
    astro.velocityY = 0
-   
+   alienGroup.destroyEach()
+   astroidGroup.destroyEach()
+   bulletGroup.destroyEach()
+   gameover.visible = true 
+   gameover.scale = 0.5
+   astro.visible = false
    if (keyDown("space")){
-     gameState = Play
-     astroidGroup.destroyEach()
-     alienGroup.destroyEach()
+    gameState = Play
+    score = 0 
+    astroidGroup.destroyEach()
+    alienGroup.destroyEach()
     bulletGroup.destroyEach()
 
-   }
+  }
+  }
 
  
-  }
+
 
 if(astro.collide(astroidGroup)||(astro.collide(alienGroup))){
   
@@ -160,7 +169,7 @@ gameState = END
 
 }
 
-function createBullet(){if (World.frameCount%15 == 0)
+function createBullet(){if (keyDown("space") && (World.frameCount%10 == 0))
 {
   var bullet = createSprite(100,100,60,10)
   bullet.addImage(bulletImg)
