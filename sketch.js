@@ -18,6 +18,7 @@ var gameover
 var bottomEdge,topEdge
 var alienArr = []
 var count
+var astroLife
 
 function preload(){
   astroImg = loadImage("Images/astro (2).png")
@@ -27,6 +28,7 @@ function preload(){
   alienImg = loadImage("Images/alien.png")
   bulletImg = loadImage("Images/bullet.png")
   explosionImg = loadImage("Images/explosion.png")
+
 }
 function setup() {
   createCanvas(800,400);
@@ -50,7 +52,7 @@ function setup() {
   topEdge = createSprite(0,0,800,5);
   bottomEdge.shapeColor = "black"
   topEdge.shapeColor = "black"
-  
+  astroLife = 3
 }
 
 function draw() {
@@ -64,6 +66,10 @@ function draw() {
   astro.velocityX = 0
  
   if (gameState === Play){
+    for(var i = 0; i<astroLife; i++){
+      image(astroImg, (i*50) + 600,10,30,30)
+      
+    }
     astro.visible = true
     gameover.visible = false
     astro.addImage(astroImg)
@@ -146,9 +152,14 @@ function draw() {
    gameover.visible = true 
    gameover.scale = 0.5
    astro.visible = false
+   textSize(20)
+   text("Aliens Blasted: "+ count, 200, 365)
+   text("Your Score:"+ score, 200, 340)
+   text("Press Space Bar To Try Again", 200,390)
    if (keyDown("space")){
     gameState = Play
     score = 0 
+    astroLife = 3
     astroidGroup.destroyEach()
     alienGroup.destroyEach()
     bulletGroup.destroyEach()
@@ -161,8 +172,15 @@ function draw() {
 
 if(astro.collide(astroidGroup)||(astro.collide(alienGroup))){
   
-gameState = END
-
+  alienGroup.destroyEach()
+  astroidGroup.destroyEach()
+  bulletGroup.destroyEach()
+astroLife--
+console.log(astroLife)
+if(astroLife == 0){
+  gameState = END
+  console.log(gameState)
+}
  astro.x = 100
  astro.y = 200 
 }
