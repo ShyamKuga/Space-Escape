@@ -84,7 +84,7 @@ function draw() {
   textFont("Georgia")
   background1.velocityX = -15
   score = Math.round(World.frameRate/15) + score
-  text("Score:"+ score,10,30)
+  text("Score: "+ score,10,30)
   text("Ailens: "+ count,10,50)
     
     astro.setCollider("circle",0,0,40);
@@ -154,11 +154,12 @@ function draw() {
    astro.visible = false
    textSize(20)
    text("Aliens Blasted: "+ count, 200, 365)
-   text("Your Score:"+ score, 200, 340)
-   text("Press Space Bar To Try Again", 200,390)
-   if (keyDown("space")){
+   text("Your Score: "+ score, 200, 340)
+   text("Press 'r' To Try Again", 200,390)
+   if (keyDown("r")){
     gameState = Play
     score = 0 
+    count = 0 
     astroLife = 3
     astroidGroup.destroyEach()
     alienGroup.destroyEach()
