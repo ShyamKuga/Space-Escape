@@ -19,6 +19,8 @@ var bottomEdge,topEdge
 var alienArr = []
 var count
 var astroLife
+var reset 
+var resetImg 
 
 function preload(){
   astroImg = loadImage("Images/astro (2).png")
@@ -28,7 +30,7 @@ function preload(){
   alienImg = loadImage("Images/alien.png")
   bulletImg = loadImage("Images/bullet.png")
   explosionImg = loadImage("Images/explosion.png")
-
+  resetImg = loadImage("Images/reset.png")
 }
 function setup() {
   createCanvas(800,400);
@@ -52,6 +54,9 @@ function setup() {
   topEdge = createSprite(0,0,800,5);
   bottomEdge.shapeColor = "black"
   topEdge.shapeColor = "black"
+  reset = createSprite(100,200,50,50)
+  reset.addImage(resetImg)
+  reset.scale = 0.1
   astroLife = 3
 }
 
@@ -72,6 +77,7 @@ function draw() {
     }
     astro.visible = true
     gameover.visible = false
+    reset.visible = false 
     astro.addImage(astroImg)
 
     background1.addImage(backgroundImg)
@@ -89,12 +95,8 @@ function draw() {
     
     astro.setCollider("circle",0,0,40);
   
-    if (keyCode === UP_ARROW){
-      astro.velocityY = -3
-    }
-    if (keyCode === DOWN_ARROW){
-      astro.velocityY = 3
-    }
+   
+    astro.y = World.mouseY
   
     if (frameCount % 30 === 0) {
       var astroids = createSprite(900,3200,40,10);
@@ -143,7 +145,6 @@ function draw() {
 
   
   if(gameState == END){
-  console.log(gameover.visible)
    background1.velocityX = 0
    astro.velocityY = 0
    alienGroup.destroyEach()
@@ -152,11 +153,13 @@ function draw() {
    gameover.visible = true 
    gameover.scale = 0.5
    astro.visible = false
+   reset.visible = true 
+   
    textSize(20)
    text("Aliens Blasted: "+ count, 200, 365)
    text("Your Score: "+ score, 200, 340)
-   text("Press 'r' To Try Again", 200,390)
-   if (keyDown("r")){
+   text("Press Reset To Try Again", 200,390)
+   if (keyDown("r")||mousePressedOver(reset)){
     gameState = Play
     score = 0 
     count = 0 
@@ -188,9 +191,10 @@ if(astroLife == 0){
 
 }
 
-function createBullet(){if (keyDown("space") && (World.frameCount%10 == 0))
+function createBullet(){if ((keyDown("space")||touches.length>0) && (World.frameCount%10 == 0))
 {
   var bullet = createSprite(100,100,60,10)
+  touches = []
   bullet.addImage(bulletImg)
   bullet.x = 100
   bullet.y = astro.y
