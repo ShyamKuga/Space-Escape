@@ -105,6 +105,7 @@ function draw() {
       astroids.y = random(0,700);
       astroids.addImage(astroidImg)
    astroids.scale = 0.04
+   
 
       astroids.velocityX = -17;
       astroids.lifetime = 300;
