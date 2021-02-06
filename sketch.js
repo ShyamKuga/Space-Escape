@@ -51,6 +51,7 @@ function setup() {
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
+ 
   reset = createSprite(100,200,50,50)
   reset.addImage(resetImg)
   reset.scale = 0.1
@@ -157,7 +158,7 @@ function draw() {
    text("Aliens Blasted: "+ count, 200, 365)
    text("Your Score: "+ score, 200, 340)
    text("Press Reset To Try Again", 200,390)
-   if (keyDown("r")||touches.length>0){
+   if (keyDown("r")||mousePressedOver(reset)){
     gameState = Play
     score = 0 
     count = 0 
