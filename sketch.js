@@ -51,7 +51,7 @@ function setup() {
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
- 
+
   reset = createSprite(100,200,50,50)
   reset.addImage(resetImg)
   reset.scale = 0.1
@@ -135,8 +135,7 @@ function draw() {
 
       bulletGroup.destroyEach()
     }
-    astro.collide(topEdge)
-    astro.bounceOff(bottomEdge)
+   
   }
 
 
