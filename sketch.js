@@ -33,13 +33,14 @@ function preload(){
   resetImg = loadImage("Images/reset.png")
 }
 function setup() {
-  createCanvas(800,400);
+  createCanvas(displayWidth, displayHeight-110);
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
-  background1 = createSprite(0,200,400,400) 
+  background1 = createSprite(windowWidth/2,0,windowWidth*2, 60) 
   background1.addImage(backgroundImg)
-  background1.scale = 2.5
+  background1.scale = 7
+ 
   alienGroup = createGroup()
   astroidGroup = createGroup()
   bulletGroup = createGroup()
@@ -61,6 +62,7 @@ function setup() {
 }
 
 function draw() {
+  background("red")
   drawSprites();
 
   /*score = frameCount
@@ -81,8 +83,8 @@ function draw() {
     astro.addImage(astroImg)
 
     background1.addImage(backgroundImg)
-    if (background1.x <200 ){
-      background1.x = background1.width/2
+    if (background1.x <0 ){
+      background1.x = windowWidth/2
      }
 
   textSize(20)
@@ -102,7 +104,7 @@ function draw() {
       var astroids = createSprite(900,3200,40,10);
       astroids.y = random(0,700);
       astroids.addImage(astroidImg)
-      astroids.scale = 0.03;
+   
       astroids.velocityX = -17;
       astroids.lifetime = 300;
       astroidGroup.add(astroids)
