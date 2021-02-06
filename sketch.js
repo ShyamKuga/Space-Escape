@@ -51,10 +51,6 @@ function setup() {
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
-  bottomEdge = createSprite(0,400,800,5);
-  topEdge = createSprite(0,0,800,5);
-  bottomEdge.shapeColor = "black"
-  topEdge.shapeColor = "black"
   reset = createSprite(100,200,50,50)
   reset.addImage(resetImg)
   reset.scale = 0.1
@@ -104,9 +100,7 @@ function draw() {
       var astroids = createSprite(900,3200,40,10);
       astroids.y = random(0,700);
       astroids.addImage(astroidImg)
-   astroids.scale = 0.04
-   
-
+      astroids.scale = 0.03;
       astroids.velocityX = -17;
       astroids.lifetime = 300;
       astroidGroup.add(astroids)
