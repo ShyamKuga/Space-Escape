@@ -157,7 +157,7 @@ function draw() {
    text("Aliens Blasted: "+ count, 200, 365)
    text("Your Score: "+ score, 200, 340)
    text("Press Reset To Try Again", 200,390)
-   if (keyDown("r")||mousePressedOver(reset)){
+   if (keyDown("r")||touches.length>0){
     gameState = Play
     score = 0 
     count = 0 
