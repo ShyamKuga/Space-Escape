@@ -104,7 +104,8 @@ function draw() {
       var astroids = createSprite(900,3200,40,10);
       astroids.y = random(0,700);
       astroids.addImage(astroidImg)
-   
+   astroids.scale = 0.04
+
       astroids.velocityX = -17;
       astroids.lifetime = 300;
       astroidGroup.add(astroids)
