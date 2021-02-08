@@ -33,11 +33,11 @@ function preload(){
   resetImg = loadImage("Images/reset.png")
 }
 function setup() {
-  createCanvas(displayWidth, displayHeight-110);
+  createCanvas(displayWidth, displayHeight);
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
-  background1 = createSprite(displayWidth/2,0,displayWidth*2, 60) 
+  background1 = createSprite(displayWidth/2,displayHeight/2,displayWidth*2, displayHeight) 
   background1.addImage(backgroundImg)
   background1.scale = 7
  
