@@ -33,7 +33,7 @@ function preload(){
   resetImg = loadImage("Images/reset.png")
 }
 function setup() {
-  createCanvas(windowWidth*2, windowHeight*3);
+  createCanvas(windowWidth*2, windowHeight);
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
