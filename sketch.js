@@ -34,9 +34,7 @@ function preload(){
 }
 function setup() {
   createCanvas(windowWidth*2, windowHeight);
-  gameover = createSprite(400,200,50,50)
-  gameover.addImage(gameoverImg)
-  gameover.visible = false
+
   background1 = createSprite(displayWidth/2,displayHeight/2,displayWidth*2, displayHeight) 
   background1.addImage(backgroundImg)
   background1.scale = 15
@@ -44,15 +42,15 @@ function setup() {
   alienGroup = createGroup()
   astroidGroup = createGroup()
   bulletGroup = createGroup()
-  astro = createSprite(10, 200, 50, 50);
+  astro = createSprite(20, 200, 50, 50);
   astro.addImage(astroImg)
-  astro.scale = 0.1
+  astro.scale = 0.15
   count = 0 
-  gameover = createSprite(400,200,50,50)
+  gameover = createSprite(displayWidth/3,displayHeight/3,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
 
-  reset = createSprite(100,200,50,50)
+  reset = createSprite(20,displayHeight/3,50,50)
   reset.addImage(resetImg)
   reset.scale = 0.1
   astroLife = 3
@@ -71,7 +69,7 @@ function draw() {
  
   if (gameState === Play){
     for(var i = 0; i<astroLife; i++){
-      image(astroImg, (i*50) + 600,10,30,30)
+      image(astroImg, (i*50) + displayWidth/3,10,30,30)
       
     }
     astro.visible = true
@@ -154,9 +152,9 @@ function draw() {
    reset.visible = true 
    
    textSize(20)
-   text("Aliens Blasted: "+ count, 200, 365)
-   text("Your Score: "+ score, 200, 340)
-   text("Press Reset To Try Again", 200,390)
+   text("Aliens Blasted: "+ count, displayWidth/4,displayHeight/2)
+   text("Your Score: "+ score, displayWidth/4, displayHeight/2 + 20 )
+   text("Press Reset To Try Again", displayWidth/4,displayHeight/2 + 40)
    if (keyDown("r")||mousePressedOver(reset)){
     gameState = Play
     score = 0 
