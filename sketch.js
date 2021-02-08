@@ -37,7 +37,7 @@ function setup() {
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
   gameover.visible = false
-  background1 = createSprite(windowWidth/2,0,windowWidth*2, 60) 
+  background1 = createSprite(displayWidth/2,0,displayWidth*2, 60) 
   background1.addImage(backgroundImg)
   background1.scale = 7
  
