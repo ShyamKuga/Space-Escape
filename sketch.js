@@ -44,9 +44,9 @@ function setup() {
   alienGroup = createGroup()
   astroidGroup = createGroup()
   bulletGroup = createGroup()
-  astro = createSprite(100, 200, 50, 50);
+  astro = createSprite(10, 200, 50, 50);
   astro.addImage(astroImg)
-  astro.scale = 0.09999
+  astro.scale = 0.1
   count = 0 
   gameover = createSprite(400,200,50,50)
   gameover.addImage(gameoverImg)
@@ -98,8 +98,8 @@ function draw() {
     astro.y = World.mouseY
   
     if (frameCount % 30 === 0) {
-      var astroids = createSprite(900,3200,40,10);
-      astroids.y = random(0,700);
+      var astroids = createSprite(displayWidth,displayHeight,40,10);
+      astroids.y = random(0,displayHeight);
       astroids.addImage(astroidImg)
       astroids.scale = 0.03;
       astroids.velocityX = -17;
@@ -109,8 +109,8 @@ function draw() {
     }
 
     if (frameCount % 30 === 0) {
-      var alien = createSprite(900,3200,40,10);
-      alien.y = random(0,400);
+      var alien = createSprite(displayWidth,3200,40,10);
+      alien.y = random(0,displayHeight);
       alien.addImage(alienImg)
       alien.scale = 0.06
       alien.velocityX = -10;
@@ -191,7 +191,7 @@ if(astroLife == 0){
 
 function createBullet(){if ((keyDown("space")||touches.length>0) && (World.frameCount%10 == 0))
 {
-  var bullet = createSprite(100,100,60,10)
+  var bullet = createSprite(20,100,60,10)
   touches = []
   bullet.addImage(bulletImg)
   bullet.x = 100
