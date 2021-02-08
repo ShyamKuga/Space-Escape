@@ -59,7 +59,7 @@ function setup() {
 }
 
 function draw() {
-  background("red")
+  background(backgroundImg)
   drawSprites();
 
   /*score = frameCount
