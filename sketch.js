@@ -33,7 +33,7 @@ function preload(){
   resetImg = loadImage("Images/reset.png")
 }
 function setup() {
-  createCanvas(windowWidth*2, windowHeight);
+  createCanvas(windowWidth*2, windowHeight*2);
 
   background1 = createSprite(displayWidth/2,displayHeight/2,displayWidth*2, displayHeight) 
   background1.addImage(backgroundImg)
