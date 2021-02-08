@@ -39,7 +39,7 @@ function setup() {
   gameover.visible = false
   background1 = createSprite(displayWidth/2,displayHeight/2,displayWidth*2, displayHeight) 
   background1.addImage(backgroundImg)
-  background1.scale = 7
+  background1.scale = 15
  
   alienGroup = createGroup()
   astroidGroup = createGroup()
